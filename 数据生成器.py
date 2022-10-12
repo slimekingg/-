@@ -48,3 +48,26 @@ def random_attendance():
 
     
     return cell 
+
+def random_number():
+    a = random.sample(range(32001101,32002650),90)
+    for i in range(90):
+        a[i]=str(a[i])
+        a[i]=a[i].zfill(9)
+    return a
+
+
+for ii in range(1,6):
+    cell = random_attendance()
+    a = random_number()
+    jidian = random_jidian()
+    wb = openpyxl.Workbook()
+    ws = wb.create_sheet("课程"+str(ii),0)
+    b = ["学号","出勤1","出勤2","出勤3","出勤4","出勤5","出勤6","出勤7","出勤8","出勤9","出勤10","出勤11","出勤12","出勤13","出勤14","出勤15","出勤16","出勤17","出勤18","出勤19","出勤20","绩点"]
+    for i in range(90):ws.cell(i+2,22,jidian[i])
+    for i in range(22):ws.cell(1,i+1,b[i])
+    for i in range(90):ws.cell(i+2,1,a[i])
+    for i in range(20):
+        for j in range(90):
+            ws.cell(j+2,i+2,cell[j][i])
+    wb.save('点名情况课程'+str(ii)+'.xlsx')
